@@ -2,7 +2,7 @@
 # working directory: TradeAndGrowth/Code/RWCodeJulia
 
 module Params
-export ModelParams
+export ModelParams, StructAllParams
 # VARIABLES INITIATED, NOT USED FOR EXPORT: updps, updw_alpha, upw_zmax, updw_l, updw_D, updw_k
 
 # import functions

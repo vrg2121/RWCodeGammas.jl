@@ -1,4 +1,5 @@
 module DrawGammas
+export StructParams, StructAllParams
 
 import Random: rand, Random
 import JLD2: @save
@@ -14,14 +15,16 @@ G = wd*"/Guesses" # path to guesses
 # Set Up Parameters
 include("./functions/ParamsFunctions.jl") 
 include("./Params.jl")
-import .Params: ModelParams
+
+import .ParamsFunctions: StructParams
+import .Params: ModelParams, StructAllParams
 
 println("Setting up parameters...")
 
 P = ModelParams(D, G);
 
 # overwrite the hardcoded gammas with draws from the random distribution
-function gen_params_normal(P::Main.Params.StructAllParams, n::Int)
+function gen_params_normal(P::StructAllParams, n::Int)
     gSolar = Vector{Float64}(undef, n)
     gWind = Vector{Float64}(undef, n)
     gBatteries = Vector{Float64}(undef, n)
