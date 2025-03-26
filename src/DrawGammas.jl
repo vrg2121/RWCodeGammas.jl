@@ -17,11 +17,11 @@ include("./functions/ParamsFunctions.jl")
 include("./Params.jl")
 
 import .ParamsFunctions: StructParams
-import .Params: ModelParams, StructAllParams
+import .Params: StructAllParams, setup_parameters
 
 println("Setting up parameters...")
 
-P = ModelParams(D, G);
+P = setup_parameters(D, G);
 
 # overwrite the hardcoded gammas with draws from the random distribution
 function gen_params_normal(P::StructAllParams, n::Int)

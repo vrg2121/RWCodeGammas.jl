@@ -229,59 +229,5 @@ function tW!(thetaW::Vector, capacityfactorW::Int, regions::DataFrame)
     thetaW .= capacityfactorW .* thetaW
 end 
 
-mutable struct StructAllParams
-    params::StructParams  # You can replace with `StructParams` if you define it
-    thetaS::Vector{Float64}
-    theta::Vector{Float64}
-    thetaW::Vector{Float64}
-    regions::DataFrame
-    majorregions::DataFrame
-    popelas::Float64
-    T::Int
-    Linecounts::DataFrame
-    linconscount::Int
-    kappa::Float64
-    updw_w::Float64
-    upw_z::Float64
-    curtailmentswitch::Int
-    decayp::Float64
-    hoursofstorage::Int
-    pB_shifter::Float64
-    pkw_solar::Int
-    pkwh_B::Float64
-    g::Float64
-    upda::Float64
-    updwF::Float64
-    updwk::Float64
-end
-
-function ModelParams(D::String, G::String)
-    tup = setup_parameters(D, G)
-    return StructAllParams(
-        tup.params,
-        tup.thetaS,
-        tup.theta,
-        tup.thetaW,
-        tup.regions,
-        tup.majorregions,
-        tup.popelas,
-        tup.T,
-        tup.Linecounts,
-        tup.linconscount,
-        tup.kappa,
-        tup.updw_w,
-        tup.upw_z,
-        tup.curtailmentswitch,
-        tup.decayp,
-        tup.hoursofstorage,
-        tup.pB_shifter,
-        tup.pkw_solar,
-        tup.pkwh_B,
-        tup.g,
-        tup.upda,
-        tup.updwF,
-        tup.updwk
-    )
-end
 
 end

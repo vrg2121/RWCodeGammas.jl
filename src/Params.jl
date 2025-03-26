@@ -2,12 +2,38 @@
 # working directory: TradeAndGrowth/Code/RWCodeJulia
 
 module Params
-export ModelParams, StructAllParams
+export setup_parameters, StructAllParams
 # VARIABLES INITIATED, NOT USED FOR EXPORT: updps, updw_alpha, upw_zmax, updw_l, updw_D, updw_k
 
 # import functions
 using ..ParamsFunctions
 import DataFrames: DataFrame
+
+mutable struct StructAllParams
+    params::StructParams  # You can replace with `StructParams` if you define it
+    thetaS::Vector{Float64}
+    theta::Vector{Float64}
+    thetaW::Vector{Float64}
+    regions::DataFrame
+    majorregions::DataFrame
+    popelas::Float64
+    T::Int
+    Linecounts::DataFrame
+    linconscount::Int
+    kappa::Float64
+    updw_w::Float64
+    upw_z::Float64
+    curtailmentswitch::Int
+    decayp::Float64
+    hoursofstorage::Int
+    pB_shifter::Float64
+    pkw_solar::Int
+    pkwh_B::Float64
+    g::Float64
+    upda::Float64
+    updwF::Float64
+    updwk::Float64
+end
 
 """
     setup_parameters(Data::String, Guesses::String)
@@ -95,88 +121,36 @@ function setup_parameters(D::String, G::String)
     T = 500
     decayp = -0.05
 
-    return (
-        params = params,
-        thetaS = thetaS,
-        theta = theta,
-        thetaW = thetaW,
-        regions = regions,
-        majorregions = majorregions,
-        popelas = popelas,
-        T = T,
-        Linecounts = Linecounts,
-        linconscount = linconscount,
-        kappa = kappa,
-        updw_w = updw_w,
-        upw_z = upw_z,
-        curtailmentswitch = curtailmentswitch,
-        decayp = decayp,
-        hoursofstorage = hoursofstorage,
-        pB_shifter = pB_shifter,
-        pkw_solar = pkw_solar,
-        pkwh_B = pkwh_B,
-        g = g,
-        upda = upda,
-        updwF = updwF,
-        updwk = updwk
-    )
-
-end
-
-mutable struct StructAllParams
-    params::StructParams  # You can replace with `StructParams` if you define it
-    thetaS::Vector{Float64}
-    theta::Vector{Float64}
-    thetaW::Vector{Float64}
-    regions::DataFrame
-    majorregions::DataFrame
-    popelas::Float64
-    T::Int
-    Linecounts::DataFrame
-    linconscount::Int
-    kappa::Float64
-    updw_w::Float64
-    upw_z::Float64
-    curtailmentswitch::Int
-    decayp::Float64
-    hoursofstorage::Int
-    pB_shifter::Float64
-    pkw_solar::Int
-    pkwh_B::Float64
-    g::Float64
-    upda::Float64
-    updwF::Float64
-    updwk::Float64
-end
-
-function ModelParams(D::String, G::String)
-    tup = setup_parameters(D, G)
     return StructAllParams(
-        tup.params,
-        tup.thetaS,
-        tup.theta,
-        tup.thetaW,
-        tup.regions,
-        tup.majorregions,
-        tup.popelas,
-        tup.T,
-        tup.Linecounts,
-        tup.linconscount,
-        tup.kappa,
-        tup.updw_w,
-        tup.upw_z,
-        tup.curtailmentswitch,
-        tup.decayp,
-        tup.hoursofstorage,
-        tup.pB_shifter,
-        tup.pkw_solar,
-        tup.pkwh_B,
-        tup.g,
-        tup.upda,
-        tup.updwF,
-        tup.updwk
+        params,
+        thetaS,
+        theta,
+        thetaW,
+        regions,
+        majorregions,
+        popelas,
+        T,
+        Linecounts,
+        linconscount,
+        kappa,
+        updw_w,
+        upw_z,
+        curtailmentswitch,
+        decayp,
+        hoursofstorage,
+        pB_shifter,
+        pkw_solar,
+        pkwh_B,
+        g,
+        upda,
+        updwF,
+        updwk
     )
 end
+
+
+
+
 
 
 end
